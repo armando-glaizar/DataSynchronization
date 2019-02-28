@@ -1,5 +1,7 @@
 {
   "name": "data-synchronization",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

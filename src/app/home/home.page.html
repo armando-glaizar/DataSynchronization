@@ -1,12 +1,48 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Ionic Blank
+      Encuesta
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+  <form [formGroup]="survey_form"> 
+    <ion-item>
+      <ion-input type="text" formControlName="name" placeholder="Nombre"></ion-input>
+      <span *ngIf="survey_form.get('name').touched && survey_form.get('name').hasError('required')">Requerido</span>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="number" formControlName="years" placeholder="Edad"></ion-input>
+      <span *ngIf="survey_form.get('years').touched && survey_form.get('years').hasError('required')">Requerido</span>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Sexo</ion-label>
+      <ion-select placeholder="Sexo" formControlName="gender">
+        <ion-select-option *ngFor="let gender of genders">{{ gender }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Ocupación</ion-label>
+      <ion-select placeholder="Ocupación" formControlName="occupation">
+        <ion-select-option *ngFor="let occupation of occupations">{{ occupation }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Ciudad</ion-label>
+      <ion-select placeholder="Ciudad" formControlName="city">
+        <ion-select-option *ngFor="let city of cities">{{ city }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div style="margin: 20px 0px;">
+      <ion-button (click)="save_survey()" [disabled]="survey_form.invalid" shape="round" expand="block">
+        Enviar <ion-icon slot="end" name="send"></ion-icon>
+      </ion-button>
+    </div>
+  </form>
 </ion-content>
